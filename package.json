@@ -2,7 +2,9 @@
   "name": "farmconnect-backend",
   "version": "1.0.0",
   "scripts": {
-    "dev": "ts-node-dev --respawn src/index.ts"
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

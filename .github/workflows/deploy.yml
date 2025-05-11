@@ -36,6 +36,11 @@ jobs:
         docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/farmconnect-backend .
         docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/farmconnect-backend
 
+    - name: Run Prisma Migrate
+      run: npx prisma migrate deploy
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
     - name: Deploy to Cloud Run
       uses: google-github-actions/deploy-cloudrun@v1
       with:
