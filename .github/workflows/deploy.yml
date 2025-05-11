@@ -28,5 +28,7 @@ jobs:
       with:
         service: farmconnect-backend
         region: us-central1
+        project: ${{ secrets.GCP_PROJECT_ID }}
         image: gcr.io/${{ secrets.GCP_PROJECT_ID }}/farmconnect-backend
         credentials: ${{ secrets.GCP_CREDENTIALS }}
+
