@@ -28,7 +28,41 @@ A scalable backend system for **FarmConnect** — a platform connecting local fo
 
 ## 📁 Project Structure
 
-<pre> ## 📁 Project Structure <code> farmconnect-backend/ ├── src/ │ ├── controllers/ # Handles API request logic │ │ ├── userController.ts │ │ ├── productController.ts │ │ ├── orderController.ts │ │ └── cartController.ts │ │ │ ├── services/ # Business logic + DB operations │ │ ├── userService.ts │ │ ├── productService.ts │ │ ├── orderService.ts │ │ └── cartService.ts │ │ │ ├── routes/ # API routes │ │ ├── userRoutes.ts │ │ ├── productRoutes.ts │ │ ├── orderRoutes.ts │ │ └── cartRoutes.ts │ │ │ ├── middlewares/ # Auth, validation, etc. │ │ └── authMiddleware.ts │ │ │ ├── utils/ # (Optional) Reusable helpers │ │ └── formatDate.ts │ │ │ └── index.ts # Main Express entry point │ ├── prisma/ │ ├── schema.prisma # DB schema (User, Product, Order, Cart) │ └── migrations/ # Auto-created by Prisma │ ├── .env # Private environment variables (not committed) ├── .env.example # Safe template version of .env ├── .gitignore # Ignored files list ├── Dockerfile # For containerizing the backend ├── package.json # Dependencies and scripts ├── tsconfig.json # TypeScript config └── README.md # Project documentation </code> </pre>
+```
+farmconnect-backend/
+├── src/
+│ ├── controllers/ # Handles API request logic
+│ │ ├── userController.ts
+│ │ ├── productController.ts
+│ │ ├── orderController.ts
+│ │ └── cartController.ts
+│ ├── services/ # Business logic and Prisma queries
+│ │ ├── userService.ts
+│ │ ├── productService.ts
+│ │ ├── orderService.ts
+│ │ └── cartService.ts
+│ ├── routes/ # Express route definitions
+│ │ ├── userRoutes.ts
+│ │ ├── productRoutes.ts
+│ │ ├── orderRoutes.ts
+│ │ └── cartRoutes.ts
+│ ├── middlewares/ # Authentication, error handling
+│ │ └── authMiddleware.ts
+│ ├── utils/ # (Optional) Helper utilities
+│ │ └── formatDate.ts
+│ └── index.ts # App entry point
+├── prisma/
+│ ├── schema.prisma # Prisma DB schema
+│ └── migrations/ # Prisma migrations
+├── .env # Secret keys (not committed)
+├── .env.example # Example environment config
+├── .gitignore # Git ignored files
+├── Dockerfile # Backend Docker container config
+├── package.json # NPM scripts and dependencies
+├── tsconfig.json # TypeScript configuration
+└── README.md # Project overview
+```
+
 
 ---
 
