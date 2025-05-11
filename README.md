@@ -28,17 +28,46 @@ A scalable backend system for **FarmConnect** — a platform connecting local fo
 
 ## 📁 Project Structure
 
-/src
-/controllers → Request logic (auth, products, cart)
-/routes → API route definitions
-/services → Database/service logic
-/middlewares → Auth middleware
-/prisma
-schema.prisma → Database schema (Prisma models)
-
-.env.example → Environment variable template
-Dockerfile → Container setup
-README.md → Project docs
+farmconnect-backend/
+│
+├── src/
+│   ├── controllers/              # Logic for handling requests
+│   │   ├── userController.ts
+│   │   ├── productController.ts
+│   │   ├── orderController.ts
+│   │   └── cartController.ts
+│   │
+│   ├── services/                 # Business logic, Prisma access
+│   │   ├── userService.ts
+│   │   ├── productService.ts
+│   │   ├── orderService.ts
+│   │   └── cartService.ts
+│   │
+│   ├── routes/                   # Route definitions
+│   │   ├── userRoutes.ts
+│   │   ├── productRoutes.ts
+│   │   ├── orderRoutes.ts
+│   │   └── cartRoutes.ts
+│   │
+│   ├── middlewares/             # JWT authentication, error handling
+│   │   └── authMiddleware.ts
+│   │
+│   ├── utils/                    # Optional: shared helper functions
+│   │   └── (e.g., formatDate.ts)
+│   │
+│   └── index.ts                 # Main Express app entry point
+│
+├── prisma/
+│   ├── schema.prisma             # Your DB schema (User, Product, Order, Cart)
+│   └── migrations/               # Auto-created by Prisma
+│
+├── .env                          # Your secrets (NOT committed)
+├── .env.example                  # Example placeholder for .env
+├── .gitignore                    # Files to exclude from Git
+├── Dockerfile                    # Container setup for deployment
+├── package.json                  # Project metadata and scripts
+├── tsconfig.json                 # TypeScript config
+└── README.md                     # Project overview
 
 
 ---
