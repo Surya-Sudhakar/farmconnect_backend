@@ -22,7 +22,7 @@ A scalable backend system for **FarmConnect** — a platform connecting local fo
 - **Prisma** – ORM for PostgreSQL
 - **Docker** – PostgreSQL containerized database
 - **JWT** – Stateless authentication
-- **Thunder Client/Postman** – API testing
+- **Thunder Client** – API testing
 
 ---
 
