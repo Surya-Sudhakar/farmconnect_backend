@@ -20,6 +20,9 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Set DATABASE_URL from GitHub Secret
+      run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV
+
     - name: Run Prisma generate
       run: npx prisma generate
 
@@ -38,8 +41,6 @@ jobs:
 
     - name: Run Prisma Migrate
       run: npx prisma migrate deploy
-      env:
-        DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
     - name: Deploy to Cloud Run
       uses: google-github-actions/deploy-cloudrun@v1
