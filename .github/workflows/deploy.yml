@@ -1,0 +1,32 @@
+name: CI/CD to GCP Cloud Run
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Prisma generate
+      run: npx prisma generate
+
+    - name: Deploy to Cloud Run
+      uses: google-github-actions/deploy-cloudrun@v1
+      with:
+        service: farmconnect-backend
+        region: us-central1
+        image: gcr.io/${{ secrets.GCP_PROJECT_ID }}/farmconnect-backend
+        credentials: ${{ secrets.GCP_CREDENTIALS }}
