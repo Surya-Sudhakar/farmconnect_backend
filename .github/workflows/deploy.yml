@@ -20,13 +20,21 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Generate Prisma client
+    - name: Run Prisma generate
       run: npx prisma generate
 
-    - name: Authenticate with Google Cloud
+    - name: Authenticate to Google Cloud
       uses: google-github-actions/auth@v1
       with:
         credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+    - name: Configure Docker for GCR
+      run: gcloud auth configure-docker --quiet
+
+    - name: Build and Push Docker Image to GCR
+      run: |
+        docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/farmconnect-backend .
+        docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/farmconnect-backend
 
     - name: Deploy to Cloud Run
       uses: google-github-actions/deploy-cloudrun@v1
