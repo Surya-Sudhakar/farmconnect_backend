@@ -5,7 +5,8 @@
     "rootDir": "src",         // 👈 Required for compiling src/index.ts
     "outDir": "dist",         // 👈 Compiled files go here
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   },
   "include": ["src"]
 }

@@ -21,3 +21,51 @@ export const login = async ({ email, password }: any) => {
   if (!valid) throw new Error('Invalid password');
   return jwt.sign({ userId: user.id, role: user.role }, SECRET, { expiresIn: '1d' });
 };
+
+export const updateUser = async (id: string, updateData: any, requester: any) => {
+  if (id !== requester.userId && requester.role !== 'admin') {
+    throw new Error('Unauthorized to update this user');
+  }
+
+  const allowedFields = ['name', 'email', 'role'];
+  const filteredData: any = {};
+
+  for (const field of allowedFields) {
+    if (updateData[field] !== undefined) {
+      filteredData[field] = updateData[field];
+    }
+  }
+
+  const updatedUser = await prisma.user.update({
+    where: { id },
+    data: filteredData,
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      role: true,
+      createdAt: true,
+    },
+  });
+
+  return updatedUser;
+};
+
+export const getUserById = async (id: string, requester: any) => {
+  if (id !== requester.userId && requester.role !== 'admin') {
+    throw new Error('Unauthorized');
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { id },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      role: true,
+      createdAt: true,
+    },
+  });
+
+  return user;
+};
