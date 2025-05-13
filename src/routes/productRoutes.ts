@@ -6,12 +6,16 @@ import {
   updateProduct
 } from '../controllers/productController';
 import { authenticate } from '../middlewares/authMiddleware';
+import { restrictTo } from '../middlewares/restrictTo'; // ✅ import role middleware
 
 const router = express.Router();
 
+// ✅ Public endpoints
 router.get('/', getAllProducts);
 router.get('/:id', getProductById);
-router.post('/', authenticate, createProduct);
-router.patch('/:id', authenticate, updateProduct);
+
+// ✅ Farmer-only endpoints
+router.post('/', authenticate, restrictTo('farmer'), createProduct);
+router.patch('/:id', authenticate, restrictTo('farmer'), updateProduct);
 
 export default router;

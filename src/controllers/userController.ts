@@ -43,3 +43,23 @@ export const getUserById = async (req: Request, res: Response) => {
   }
 };
 
+export const getMe = async (req: express.Request, res: Response): Promise<void> => {
+  console.log("📥 Entered getMe");
+
+  try {
+    console.log("🧠 Calling getUserById with:", req.user);
+    const user = await userService.getUserById(req.user!.userId, req.user!);
+
+    if (!user) {
+      console.log("❌ User not found for ID:", req.user!.userId);
+      res.status(404).json({ message: 'User not found' });
+      return;
+    }
+
+    console.log("✅ User found:", user);
+    res.status(200).json(user);
+  } catch (error: any) {
+    console.error("🔥 getMe failed:", error);
+    res.status(500).json({ error: error.message });
+  }
+};
