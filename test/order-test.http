@@ -1,0 +1,26 @@
+### ✅ Login as Consumer
+POST http://localhost:8080/api/v1/users/login
+Content-Type: application/json
+
+{
+  "email": "Sujay@example.com",
+  "password": "123456"
+}
+
+### ✅ Place a New Order
+POST http://localhost:8080/api/v1/orders
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiMWM3MWE5Yy03NTM2LTRjNGUtODdiNS05OWFlYTJiNzIyNTkiLCJyb2xlIjoiY29uc3VtZXIiLCJpYXQiOjE3NDcwOTI1OTcsImV4cCI6MTc0NzE3ODk5N30.AZFhG98A-pDS0XyOKPdtV8pednz-m9NHsr74TqfvdQU
+Content-Type: application/json
+
+{
+  "productId": "9e5cd817-98f4-4ef5-acc0-7a7573630e32",
+  "quantity": 2
+}
+
+### ✅ Get All My Orders
+GET http://localhost:8080/api/v1/orders
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiMWM3MWE5Yy03NTM2LTRjNGUtODdiNS05OWFlYTJiNzIyNTkiLCJyb2xlIjoiY29uc3VtZXIiLCJpYXQiOjE3NDcwOTI1OTcsImV4cCI6MTc0NzE3ODk5N30.AZFhG98A-pDS0XyOKPdtV8pednz-m9NHsr74TqfvdQU
+
+### ✅ Get Order Details by ID
+GET http://localhost:8080/api/v1/orders/4383d7b1-d636-4c5a-89b0-454a15e209af
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiMWM3MWE5Yy03NTM2LTRjNGUtODdiNS05OWFlYTJiNzIyNTkiLCJyb2xlIjoiY29uc3VtZXIiLCJpYXQiOjE3NDcwOTI1OTcsImV4cCI6MTc0NzE3ODk5N30.AZFhG98A-pDS0XyOKPdtV8pednz-m9NHsr74TqfvdQU

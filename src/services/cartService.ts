@@ -2,10 +2,25 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export const addToCart = async (userId: string, { productId, quantity }: any) => {
+  // Check if this product is already in the user's cart
+  const existingItem = await prisma.cart.findFirst({
+    where: { userId, productId }
+  });
+
+  if (existingItem) {
+    // Update the quantity if found
+    return prisma.cart.update({
+      where: { id: existingItem.id },
+      data: { quantity: existingItem.quantity + quantity }
+    });
+  }
+
+  // Otherwise, create a new cart item
   return prisma.cart.create({
     data: { userId, productId, quantity }
   });
 };
+
 
 export const getCart = async (userId: string) => {
   return prisma.cart.findMany({
